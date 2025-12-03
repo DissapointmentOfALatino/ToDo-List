@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { MdDeleteOutline } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
 import './App.css'
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
             <input type="text" placeholder="What's the task description?" />
           </div>
           <div className="todo-input-item">
-            <button type="button" className="primaryBtn">Add</button>
+            <button type="button" className="primaryBtn">Submit+</button>
           </div>
         </div>
 
@@ -35,8 +37,17 @@ function App() {
 
         <div className="todo-list">
           <div className="todo-list-item">
-            <h3>Task 1</h3>
-            <p>Description</p>
+
+            <div>
+              <h3>Task 1</h3>
+              <p>Description</p>
+            </div>
+
+            <div>
+              <MdDeleteOutline className="icon" title="Do you want to delete?"/>
+              <FaCheck className="check-icon" title="Do you want to complete?"/>
+            </div>
+
           </div>
         </div>
 
