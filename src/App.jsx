@@ -9,6 +9,21 @@ function App() {
 
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
 
+  const [allToDos, setToDos] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDesc, setNewDesc] = useState("");
+
+  function handleAddToDo() {
+      let newToDoItem = {
+        title: newTitle,
+        description: newDesc
+      }
+
+      let updatedToDoArr = [...allToDos];
+      updatedToDoArr.push(newToDoItem);
+      setToDos(updatedToDoArr);
+  }
+
   return(
     <>
       <h1>My Todos</h1>
@@ -16,15 +31,23 @@ function App() {
       <div className="todo-wrapper">
         <div className="todo-input">
           <div className="todo-input-item">
+
             <label>Title</label>
-            <input type="text" placeholder="What's the task title?" />
+            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} 
+            placeholder="What's the task title?" />
+
           </div>
           <div className="todo-input-item">
+
             <label>Description</label>
-            <input type="text" placeholder="What's the task description?" />
+            <input type="text" value={newDesc} onChange={(e) => setNewDesc(e.target.value)} 
+            placeholder="What's the task description?" />
+
           </div>
           <div className="todo-input-item">
-            <button type="button" className="primaryBtn">Submit+</button>
+
+            <button type="button" onClick={handleAddToDo} className="primaryBtn">Submit+</button>
+
           </div>
         </div>
 
@@ -34,7 +57,33 @@ function App() {
           <button className={`secondaryBtn ${isCompleteScreen===true && 'active'}`} 
           onClick={() => setIsCompleteScreen(true)}>Completed</button>
         </div>
+        <div className="todo-list">
+          {allToDos.map((item, index) => {
+            return(
+              <div className="todo-list-item" key={index}>
 
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+
+                <div>
+                  <MdDeleteOutline className="icon" title="Do you want to delete?"/>
+                  <FaCheck className="check-icon" title="Do you want to complete?"/>
+                </div>
+
+              </div> 
+              )
+            })}
+        </div>
+        
+
+      </div>
+    </>
+  )
+}
+
+/*
         <div className="todo-list">
           <div className="todo-list-item">
 
@@ -48,12 +97,7 @@ function App() {
               <FaCheck className="check-icon" title="Do you want to complete?"/>
             </div>
 
-          </div>
-        </div>
-
-      </div>
-    </>
-  )
-}
+          </div> 
+*/
 
 export default App
